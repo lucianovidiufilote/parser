@@ -7,12 +7,20 @@ class Parser {
     public $file;
     public $configKeys = [];
 
+    /**
+    * Comment: Why did you use this way of instantiating the object?
+    */
     public static function Parser($filePath) 
     {
         $parser = new self;
         $parser->file = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         return $parser;
     }
+
+  /**
+    * Comment: Why (new self) ?
+    * Comment: Can you explain what $configPattern does?
+    */
     public function regexParser()
     {
         foreach($this->file as $line) {
@@ -24,11 +32,16 @@ class Parser {
         return new self;
     }
 
+    
     public function cleaner()
     {
         foreach($this->configs as $key => $config) {
             // $config = each line of the txt file
             $stringLength = strlen($config);
+            
+            /*
+            * Comment: Can you find a cleaner mode of doing this bit?
+            */ 
             for($index = 0; $index < $stringLength; $index++) {
                 if($config[$index] == '=') {
 
